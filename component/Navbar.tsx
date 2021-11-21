@@ -1,20 +1,22 @@
 import axios from 'axios';
-import React, { RefObject, useRef, useState } from 'react';
+import { GetStaticProps } from 'next';
+
+import React, { RefObject, useEffect, useRef, useState } from 'react';
 import { Category, Question } from '../types';
 import styles from './Navbar.module.css';
 
 interface NavbarProps {
-  categories: Category[];
   handleSubmit: (e: any) => void;
   categoryRef: RefObject<HTMLSelectElement>;
   amountRef: RefObject<HTMLInputElement>;
+  categories: Category[];
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  categories,
   handleSubmit,
   categoryRef,
   amountRef,
+  categories,
 }) => {
   return (
     <>

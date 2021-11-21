@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { NextPage } from 'next';
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
@@ -17,21 +17,29 @@ interface QuestionItem {
   incorrect_answers: string[];
 }
 
-const Home: NextPage = () => {
+interface HomeProps {
+  categories: Category[];
+}
+
+// fetch and render categories at build time
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await axios.get('https://opentdb.com/api_category.php');
+  const categories: Category[] = res.data.trivia_categories;
+
+  return {
+    props: {
+      categories,
+    },
+    revalidate: 600,
+  };
+};
+
+const Home: NextPage<HomeProps> = ({ categories }) => {
   const [quizCards, setQuizCards] = useState<Question[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
 
   // Ref in Navbar
   const categoryEl = useRef<HTMLSelectElement>(null);
   const amountEl = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await axios.get('https://opentdb.com/api_category.php');
-      setCategories(res.data.trivia_categories);
-    };
-    fetchCategories();
-  }, []);
 
   const decodeString = (str: string) => {
     const textArea = document.createElement('textarea');
