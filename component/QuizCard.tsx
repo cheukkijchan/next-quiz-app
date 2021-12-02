@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { CardContent, Typography } from '@material-ui/core';
+import React, { useState, useEffect, useRef } from 'react';
+import ReactCardFlip from 'react-card-flip';
 import { Question } from '../types';
 
 import styles from './QuizCard.module.css';
@@ -14,11 +16,11 @@ export const QuizCard: React.FC<QuizCardProps> = ({ question }) => {
   const frontEl = useRef<HTMLDivElement>(null);
   const backEl = useRef<HTMLDivElement>(null);
 
-  // dynamic height for questions with different length
+  // set card height for questions with different length
   const setMaxHeight = () => {
     const frontHeight = frontEl.current!.getBoundingClientRect().height;
     const backHeight = backEl.current!.getBoundingClientRect().height;
-    setHeight(Math.max(frontHeight, backHeight, 100));
+    setHeight(Math.max(frontHeight, backHeight, 5));
   };
 
   // useEffect when question change
@@ -36,24 +38,30 @@ export const QuizCard: React.FC<QuizCardProps> = ({ question }) => {
   }, []);
 
   return (
-    <div
-      className={`${styles.card} ${flip ? styles.flip : ''}`}
-      style={{ height: height }}
-      onClick={() => setFlip(!flip)}
-    >
-      <div className={styles.front} ref={frontEl}>
-        {question.question}
-        <div className={styles.options}>
-          {question.options.map((option) => (
-            <div className={styles.option} key={option}>
-              {option}
-            </div>
-          ))}
+    <div onClick={() => setFlip(!flip)}>
+      <ReactCardFlip isFlipped={flip} flipDirection='horizontal'>
+        <div className={styles.card} ref={frontEl} style={{ height: height }}>
+          <CardContent>
+            <Typography>{question.question}</Typography>
+            <Typography
+              className={styles.options}
+              component='div'
+              variant='body2'
+              color='textSecondary'
+              font-size='0.75rem'
+            >
+              {question.options.map((option) => (
+                <div className={styles.option} key={option}>
+                  {option}
+                </div>
+              ))}
+            </Typography>
+          </CardContent>
         </div>
-      </div>
-      <div className={styles.back} ref={backEl}>
-        {question.answer}
-      </div>
+        <div className={styles.card} ref={backEl} style={{ height: height }}>
+          <CardContent>{question.answer}</CardContent>
+        </div>
+      </ReactCardFlip>
     </div>
   );
 };

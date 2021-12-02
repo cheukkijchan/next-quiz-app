@@ -1,10 +1,6 @@
-import axios from 'axios';
-import { GetStaticProps } from 'next';
-
-import React, { RefObject, useEffect, useRef, useState } from 'react';
-import { Category, Question } from '../types';
+import React, { RefObject } from 'react';
+import { Category } from '../types';
 import styles from './Navbar.module.css';
-
 interface NavbarProps {
   handleSubmit: (e: any) => void;
   categoryRef: RefObject<HTMLSelectElement>;

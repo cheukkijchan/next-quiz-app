@@ -1,8 +1,7 @@
 import axios from 'axios';
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Navbar } from '../component/Navbar';
 import { QuizCardList } from '../component/QuizCardList';
 import styles from '../styles/Home.module.css';
