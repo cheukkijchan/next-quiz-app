@@ -4,7 +4,7 @@
 
 ![next-quiz](https://user-images.githubusercontent.com/48294756/153361190-ee55df32-60ce-42e9-8f51-d2f3bf8925e7.png)
 
-A quizcard minigame 
+A quizcard minigame, click and flip the card to take a quick look of the answer
 
 ### Built with
 
