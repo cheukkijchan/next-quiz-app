@@ -11,6 +11,7 @@ A quizcard minigame, click and flip the card to take a quick look of the answer
 - Typescript
 - React
 - NextJS
+- Trivia API
 
 
 ## Getting Started
