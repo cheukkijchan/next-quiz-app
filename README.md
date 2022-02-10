@@ -1,13 +1,20 @@
-## Description
+# Quiz card
 
-A quiz card mini app create with nextjs and Open Trivia Database api
+## About this Project
+
+
+A quizcard minigame 
+
+### Built with
+
+- Typescript
+- React
+- NextJS
+
 
 ## Getting Started
 
-First, run the development server:
+Steps to run this project locally:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. Run `npm i` command in client directories
+2. Run `npm run dev` command in client directories
